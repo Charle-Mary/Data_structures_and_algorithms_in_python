@@ -35,8 +35,36 @@ class LinkedList(object):
             self.head = currentNode.nextNode
         else:
             previousNode.nextNode = currentNode.nextNode
-    
-    def size(self):
+        
+    def removeSortedDuplicate(self):
+        if self.head is None:
+            return
+
+        currentNode = self.head
+        while currentNode.nextNode is not None:
+            if currentNode.data != currentNode.nextNode.data:
+                currentNode = currentNode.nextNode
+            else:
+                self.size -= 1
+                currentNode.nextNode = currentNode.nextNode.nextNode
+
+    def removeUnsortedDuplicate(self):
+        unique = dict()
+
+        currentNode  = self.head
+        previousNode = None
+        while currentNode is not None:
+            if currentNode.data  in unique:
+                self.size -= 1
+                previousNode.nextNode = currentNode.nextNode
+                currentNode = None
+            else:
+                unique[currentNode.data] = 1
+                previousNode = currentNode
+            currentNode = previousNode.nextNode
+            
+
+    def size1(self):
         return self.size
 
     def size2(self):
@@ -65,3 +93,28 @@ class LinkedList(object):
         while actualNode is not None:
             print('%d' % actualNode.data)
             actualNode = actualNode.nextNode
+
+
+
+linkedlist = LinkedList()
+
+linkedlist.InsertStart(12)
+linkedlist.InsertStart(13)
+linkedlist.InsertStart(12)
+linkedlist.InsertStart(13)
+linkedlist.InsertStart(162)
+linkedlist.InsertStart(192)
+linkedlist.InsertStart(192)
+
+print(linkedlist.size1())
+print('\n')
+
+linkedlist.traverseList()
+print('\n')
+
+linkedlist.removeUnsortedDuplicate()
+linkedlist.traverseList()
+print('\n')
+
+print(linkedlist.size1())
+
