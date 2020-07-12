@@ -40,3 +40,11 @@ class LinkedList(object):
             actualNode = actualNode.nextNode
 
         actualNode.nextNode  = newNode
+
+    def traverseList(self):
+        actualNode = self.head
+
+        while actualNode is not None:
+            print('%d' % actualNode.data)
+            actualNode = actualNode.nextNode
+            
